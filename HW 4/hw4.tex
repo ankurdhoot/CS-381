@@ -1,0 +1,165 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\begin{document}
+\author{Ankur Dhoot}
+\title{CS 381 HW 3}
+\maketitle
+
+\section*{Q1}
+
+\paragraph{(a)}
+Using Algorithm LCS-LENGTH (page 394) on X = WASHINGTON and Y = MINNESOTA:
+
+c = 
+\[
+	\begin{bmatrix}
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+ 
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+ 
+  0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+ 
+  0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+ 
+  0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+ 
+  0 & 0 & 1 & 2 & 2 & 2 & 2 & 2 & 2 & 2 \\
+ 
+  0 & 0 & 1 & 2 & 2 & 2 & 2 & 2 & 2 & 2 \\
+ 
+  0 & 0 & 1 & 2 & 2 & 2 & 2 & 2 & 3 & 3 \\
+ 
+  0 & 0 & 1 & 2 & 2 & 2 & 2 & 3 & 3 & 3 \\
+ 
+  0 & 0 & 1 & 2 & 3 & 3 & 3 & 3 & 3 & 3 \\
+
+\end{bmatrix} 
+ 	\]
+
+b = 
+ 
+\[
+	\begin{bmatrix}
+ 	
+ 	\uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow \\
+ 
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \nwarrow \\
+ 
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \nwarrow & \leftarrow & \leftarrow & \uparrow \\
+ 
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow \\
+ 
+ \uparrow & \nwarrow & \leftarrow & \leftarrow & \leftarrow & \uparrow & \uparrow & \uparrow & \uparrow \\
+ 
+ \uparrow & \uparrow & \nwarrow & \nwarrow & \leftarrow & \leftarrow & \leftarrow & \leftarrow & \leftarrow \\
+ 
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow \\
+ 
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \nwarrow & \leftarrow \\
+
+ \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \uparrow & \nwarrow & \uparrow & \uparrow \\
+ 
+ \uparrow & \uparrow & \nwarrow & \nwarrow & \leftarrow & \leftarrow & \uparrow & \uparrow & \uparrow 
+ 	
+ 	\end{bmatrix} 
+ 	\]
+
+
+	\paragraph{(b)}
+	If we were to add a print statement that prints the indices on which PRINT-LCS were called, the trace would be as follows:
+	
+	PRINT-LCS called with i = 10 and j = 9
+	
+	PRINT-LCS called with i = 9 and j = 9
+	
+	PRINT-LCS called with i = 8 and j = 9
+	
+	PRINT-LCS called with i = 8 and j = 8
+	
+	PRINT-LCS called with i = 7 and j = 7
+	
+	PRINT-LCS called with i = 6 and j = 7
+	
+	PRINT-LCS called with i = 6 and j = 6
+	
+	PRINT-LCS called with i = 6 and j = 5
+	
+	PRINT-LCS called with i = 6 and j = 4
+	
+	PRINT-LCS called with i = 5 and j = 3
+	
+	PRINT-LCS called with i = 5 and j = 2
+	
+	PRINT-LCS called with i = 4 and j = 1
+	
+	PRINT-LCS called with i = 3 and j = 1
+	
+	PRINT-LCS called with i = 2 and j = 1
+	
+	PRINT-LCS called with i = 1 and j = 1
+	
+	PRINT-LCS called with i = 0 and j = 1
+	
+	Anytime both indices reduce by 1 corresponds to a match on the last character of that subproblem. Therefore, when i = 8, 6, 5 which corresponds to T, N, I. Thus, PRINT-LCS will return INT as the longest common subsequence.
+	
+	\paragraph{(c)}
+	The characters matched in Y = MINNESOTA are at indices 2,4,8 = INT (assuming 1 based indexing as in the book). However, it's clear that indices 2,3,8 = INT as well. Why wasn't 2,3,8 returned as the LCS? PRINT-LCS follows the arrows in the b table, and thus proceeds in a bottom to top, right to left manner. When Y[4] = N, X[6] = N, so we're at position (6,4) in the table. Since c[6, 4] = c[6,3], but position (6,4) is farther right than position (6,3), the algorithm matches (6,4) first. Essentially, the algorithm wants to match characters as far back in the two strings as possible in order to optimize the number of matches. Thus, even though Y[2,3,8] = INT = Y[2,4,8], the algorithm will choose the match that is further back in the string. 
+	
+\section*{Q2}
+Preliminary Notation: 
+
+Let $X_{i,j}$ denote the string with characters $x_{i}x_{i+1}...x_{j}$. Let c[i, j] denote the number of ways one one could break the string $X_{i,j}$ into sequences of words. Thus, our end goal is to compute c[1,n].
+
+
+Basic Idea: 
+
+Similar to the rod cutting problem, we'll make an initial cut at index m that corresponds to the first word in a sequence. If $X_{1,m}$ is a word, then we need to know how many sequences of words are possible in $X_{m+1, n}$. But by definition, this is just c[m+1,n]. We then try all possible cuts for a first word. Of those cuts which yield a valid first word, we sum the number of sequences possible starting with that word (i.e the number of possible sequences in $X_{m+1,n}$ for each m that yields a valid first word). This sum then gives us the desired total.
+
+We'll let the size of the subproblem be the length of the string for which we're trying to compute the number of word sequences. Based on the idea above, we can write the recursive formula
+
+c[i, j] = 
+\[ \begin{cases} 
+      1 & j = i + 1 \\
+      I_{i,i}c[i+1,j] + I_{i,i+1}c[i+2,j] ... + I_{i,j}c[j+1,j] & j \leq i \\
+   \end{cases}
+\]
+where $I_{i,j}$ is the indicator variable (i.e = 0 or 1) denoting whether $X_{i,j}$ is a word. As can be seen, a subproblem only depends on solutions to smaller subproblems. Thus, we can use dynamic programming!!
+
+\begin{algorithm}
+\caption{Compute total number of word sequences into which X can be broken}
+\begin{algorithmic}[1]
+\Function{Word-Sequences}{String X}
+	\State n = X.length
+	\State let c[1...n+1, 1...n] be a new table
+	\For{s = 1 to n} \Comment{initialize table, empty string has one sequence}
+		\State c[s + 1, s] = 1
+	\EndFor
+	\For{j = 1 to n}  \Comment{j is the subproblem size}
+		\For{i = 1 to n - j + 1}  \Comment{i is starting index of subproblem}
+			\State end = i + j - 1 \Comment{end is last index of subproblem}
+			\State c[i, end] = 0   
+			\For{k = 0 to j - 1}  \Comment{iterate over all possible first cuts}
+				\If{isWord($X_{i, i+k}$)} 
+					\State c[i, end] += c[i + k + 1, end]
+				\EndIf
+			\EndFor
+		\EndFor
+	\EndFor
+	\State \Return c[1,n]
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+We initialize the number of sequences of an empty string to be 1. We do this so that if the entire subproblem is a word, we increment the c[i,j] table by 1 since there is one sequence possible of the remaining characters (the empty sequence) following that word. 
+
+As can be seen, subproblems are computed smallest to largest so that the table has solutions to the smaller subproblems available for constant time lookup in every iteration. The counter j denotes the size of the subproblem. The counter i denotes the starting index of the subproblem. The counter k ranges over the subproblem size and denotes how far from the starting index we make the cut for the first word. If the cut we make yields a valid word, then the number of sequences possible starting with that first word is just the number of sequences possible in the rest of the string (since we fixed the first word). Adding this over all valid first words gives us each c table entry. At the end, we return c[1,n] since this is the desired total. 
+
+Runtime:
+
+We compute all c[i,j] entries in the table of which there are O($n^{2}$). Each table entry, c[i,j], computation takes O(j - i) time. We iterate through all possible cuts (of which there are j - i) and check if the cut yields a valid word (which is constant time by assumption). If we have a valid word, we use preexisting table entries to add to our sum which also takes O(1) time. Thus, each c[i,j] entries takes O(j-i) time which is also O(n). Thus, we compute O($n^{2}$) entries each in time O(n) for a grand total run time of O($n^{3}$).
+
+\end{document}

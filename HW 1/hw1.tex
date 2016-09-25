@@ -1,0 +1,89 @@
+\documentclass[11pt,twoside,a4paper]{article}
+\usepackage{mathtools}
+\usepackage{forest}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\begin{document}
+\author{Ankur Dhoot}
+
+CS 381 HW 1
+
+Ankur Dhoot \newline
+
+1. 
+
+a) T(n) = 9T(n/3) + $n^{2}$ for $n > 2$ and T(n) = 1 otherwise
+
+	a = 9 \qquad b = 3 \qquad	f(n) = $n^{2}$
+	
+Since $n^{\log_b a}$ = $n^{\log_3 9}$ = $n^{2}$ and f(n) = $\Theta(n^{2})$, f(n) = $\Theta(n^{\log_b a})$. Thus, we are in case 2 of the master theorem. Therefore, T(n) = $\Theta(n^{2} \lg n)$. \newline
+
+b) T(n) = 6T(n/2) + $n^{2.4}$ for $n > 1$ and T(n) = 1 otherwise
+ 
+ a = 6 \qquad b = 3 \qquad f(n) = $n^{2.4}$
+ 
+ Since $n^{\log_b a}$ = $n^{\log_2 6}$ = $n^{2.58}$ and f(n) = $\Theta(n^{2.4})$, f(n) = $O(n^{2.58 - \epsilon})$ for $0 < \epsilon < .18$. Thus, we are in case 1 of the master theorem. Therefore, T(n) = $\Theta(n^{\log_2 6}) = \Theta(n^{2.58})$. \newline
+ 
+c) T(n) = 12T(n/4) + $n^{2}$ for $n > 3$ and T(n) = 1 otherwise
+
+a = 12 \qquad b = 4 \qquad f(n) = $n^{2}$
+
+Since $n^{\log_b a}$ = $n^{\log_4 12}$ = $n^{1.79}$ and f(n) = $\Theta(n^{2})$, f(n) = $\Omega(n^{1.79 + \epsilon})$ for $0 < \epsilon < .20$. Thus, we are in case 3 of the master theorem. Therefore, T(n) = $\Theta(f(n)) = \Theta(n^{2})$. \newline
+
+2. 
+Proof: By induction on n
+
+Base case: n = \{1,2,3\}
+
+For all n $\in$ \{1,2,3\}, T(n) = 1 $\leq$ 12n.
+Thus, the statement holds for the base case.
+
+Induction Step:
+
+\qquad Inductive Hypothesis: Suppose that the statement holds for all positive $m < n$. That is T(m) $\leq$ 12m. 
+
+Now, we must show that the statement holds for n. That is, we must show that T(n) $\leq$ 12n.
+
+T(n) = T($\floor*{2n/3}$) + T($\floor*{n/4}$) + n
+
+$\leq 12\floor*{2n/3} + 12\floor*{n/4} + n$ (by induction hypothesis)
+
+$\leq 12(2n/3) + 12(n/4) + n$ (by definition of floor function)
+
+$=8n + 3n + n$
+
+=12n.
+
+Thus, having established the basis and induction step, the claim follows by the principle of mathematical induction. \newline
+
+3.
+T(n) = 1 for $n \leq 2$
+
+T(n) = T($\floor*{3n/5}$) + T($\floor*{2n/5}$) + $cn$ for $n > 2$
+
+Recursion Tree argument:
+
+The longest simple path from root to a leaf is $n \rightarrow \floor{3n/5} \rightarrow \floor{3\floor{3n/5}/5} \rightarrow ... \rightarrow 1$ Thus, the height of the tree is at most $\log_{5/3} n$. Consider the first level of the tree. The size of the "subproblem" is $\floor*{3n/5}$ and $\floor*{2n/5}$ which will add cost c$\floor*{3n/5}$ + c$\floor*{2n/5}\leq cn$. The second level will have 4 "subproblems" of size $\floor{3\floor{3n/5}/5}, \floor{2\floor{3n/5}/5}, \floor{3\floor{2n/5}/5}, \floor{2\floor{2n/5}/5}$, which will contribute cost c$\floor{3\floor{3n/5}/5} + c\floor{2\floor{3n/5}/5} + c\floor{3\floor{2n/5}/5} + c\floor{2\floor{2n/5}/5}$ $\leq c(9n/25) + c(6n/25) + c(6n/25) + c(4n/25) = cn.$ It's easy to see that every level of the tree will contribute at most $cn$ to the cost of the tree with the cost per level decreasing as we move further down the tree since the tree isn't a complete binary tree and more internal nodes will be missing. Since the total cost is the sum of the cost at each level which is bounded by $cn$ and there are at most $\log_{5/3} n$ levels, the total cost $T(n)$ is $O(cn * \log_{5/3} n) = O(n\lg n)$.
+
+
+Sketch of first two levels of recursion tree:\newline
+
+
+\begin{forest}
+  for tree={
+    draw,
+    align=center
+  }
+  [$n$
+    [$\floor*{2n/5}$
+      [$\floor*{2\floor{2n/5}/5}$]
+      [$\floor*{3\floor{2n/5}/5}$]
+    ]
+    [$\floor*{3n/5}$
+      [$\floor{2\floor{3n/5}/5}$]
+      [$\floor{3\floor{3n/5}/5}$]
+    ]
+  ]
+\end{forest}
+
+\end{document}
