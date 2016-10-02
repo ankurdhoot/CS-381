@@ -154,7 +154,7 @@ where $I_{i,j}$ is the indicator variable (i.e = 0 or 1) denoting whether $X_{i,
 \end{algorithmic}
 \end{algorithm}
 
-We initialize the number of sequences of an empty string to be 1. We do this so that if the entire subproblem is a word, we increment the c[i,j] table by 1 since there is one sequence possible of the remaining characters (the empty sequence) following that word. 
+We initialize the number of sequences of an empty string to be 1. We do this so that if the entire subproblem is a word, we increment the c[i,j] entry by 1 since there is one sequence possible of the remaining characters (the empty sequence) following that word. 
 
 As can be seen, subproblems are computed smallest to largest so that the table has solutions to the smaller subproblems available for constant time lookup in every iteration. The counter j denotes the size of the subproblem. The counter i denotes the starting index of the subproblem. The counter k ranges over the subproblem size and denotes how far from the starting index we make the cut for the first word. If the cut we make yields a valid word, then the number of sequences possible starting with that first word is just the number of sequences possible in the rest of the string (since we fixed the first word). Adding this over all valid first words gives us each c table entry. At the end, we return c[1,n] since this is the desired total. 
 
@@ -162,4 +162,33 @@ Runtime:
 
 We compute all c[i,j] entries in the table of which there are O($n^{2}$). Each table entry, c[i,j], computation takes O(j - i) time. We iterate through all possible cuts (of which there are j - i) and check if the cut yields a valid word (which is constant time by assumption). If we have a valid word, we use preexisting table entries to add to our sum which also takes O(1) time. Thus, each c[i,j] entries takes O(j-i) time which is also O(n). Thus, we compute O($n^{2}$) entries each in time O(n) for a grand total run time of O($n^{3}$).
 
+But wait. There's more!!! If we look at the recurrence defined above, in order to compute c[1,n], we only need subproblems of the form c[i,n]. These subproblems in turn only need subsubproblems of the form c[i', n].
+
+Thus, we don't need to compute all c[i,j] entries in the table. We can get away with just all problems of the form c[i,n]. We can get rid of the second dimension and let c[i] denote the number of word sequences possible starting at index i in the string X (and ending at the end of the string).
+
+\begin{algorithm}
+\caption{Compute total number of word sequences into which X can be broken, even more efficient}
+\begin{algorithmic}[1]
+\Function{Word-Sequences}{String X}
+	\State n = X.length
+	\State let c[1...n+1] be a new table
+	\State c[n+1] = 1
+	\For{j = 1 to n}  \Comment{j is the subproblem size}
+		\State start = n - j + 1
+			\State c[start] = 0  
+			\For{k = 0 to j - 1}  \Comment{iterate over all possible first cuts}
+				\If{isWord($X_{start, start + k}$)} 
+					\State c[start] += c[start + k + 1]
+				\EndIf
+			\EndFor
+	\EndFor
+	\State \Return c[1]
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+The new algorithm is almost identical to the previous, except for one major difference: we have no for loop with counter i since for a given j we know that the only subproblem we need to solve is c[n - j + 1]. We solve subproblems for "right to left". That is, we first solve c[n], then c[n-1], then c[n-2], until we get to c[1] which is our desired quantity. 
+
+Runtime:
+We compute n entries in the c array. All subproblems needed to solve a given problem have already been solved and stored in the array. The maximum number of subproblems we ever need is n (when computing c[1]). Thus, we fill n entries in the array, each in time at most O(n) leading to an O($n^{2}$) runtime.
 \end{document}
