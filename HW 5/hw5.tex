@@ -101,20 +101,25 @@ However, k cannot be an intermediate vertex on any shortest path from i to k (el
  \State Initialize N ($n_{ij} = N_{ij}^{0}$ as described above)
  \For{k = 1 to n}
  	\For{i = 1 to n}
- 		\If{$d_{ij}$ $<$ $d_{ik}$ + $d_{kj}$}
- 			\State $n_{ij} = n_{ij}$
- 		\ElsIf{$d_{ij}$ $=$ $d_{ik}$ + $d_{kj}$}
- 			\State $n_{ij}$ = $n_{ij}$ + $n_{ik}$ x $n_{kj}$
- 		\Else
- 			\State $n_{ij}$ = $n_{ik}$ x $n_{kj}$
- 		\EndIf
- 		\State $d_{ij}$ = min($d_{ij}$, $d_{ik}$ + $d_{kj}$)
+ 		\For{j = 1 to n}
+ 			\If{$d_{ij}$ $<$ $d_{ik}$ + $d_{kj}$}
+ 				\State $n_{ij} = n_{ij}$
+ 			\ElsIf{$d_{ij}$ $=$ $d_{ik}$ + $d_{kj}$}
+ 				\State $n_{ij}$ = $n_{ij}$ + $n_{ik}$ x $n_{kj}$
+ 			\Else
+ 				\State $n_{ij}$ = $n_{ik}$ x $n_{kj}$
+ 			\EndIf
+ 			\State $d_{ij}$ = min($d_{ij}$, $d_{ik}$ + $d_{kj}$)
+ 		\EndFor
  	\EndFor
  \EndFor
  \State \Return D, N
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+The runtime is clearly O($V^{3}$) due to the three for loops and all computation inside the innermost for loop is O(1) depending only on previously computed values. The space required is O($V^2$) since we dropped the superscripts and now only store the V x V matrices N and D, compared to the common implementation which uses O($V^3$) space to store the matrices computed at each iteration.
+
 
 
 \end{document}
