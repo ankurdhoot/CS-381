@@ -63,7 +63,7 @@ $N_{ij}^{k}$ =
 
 \[ \begin{cases} 
       N_{ij}^{k-1} & d_{ij}^{k-1} < d_{ik}^{k-1} + d_{kj}^{k-1} \\
-      N_{ij}^{k-1} + \delta(k) & d_{ij}^{k-1} = d_{ik}^{k-1} + d_{kj}^{k-1} \\
+      N_{ij}^{k-1} + \delta_{ij}^{k} & d_{ij}^{k-1} = d_{ik}^{k-1} + d_{kj}^{k-1} \\
       \delta_{ij}^{k} & d_{ij}^{k-1} > d_{ik}^{k-1} + d_{kj}^{k-1}
    \end{cases}
 \]
@@ -72,9 +72,9 @@ where $\delta_{ij}^{k}$ = $N_{ik}^{k-1}$ x $N_{kj}^{k-1}$
 
 The reasoning is as follows:
 
-1. If the shortest path between i and j using intermediate vertices \{1,2,...k\} doesn't use vertex k (i.e $d_{ij}^{k-1} < d_{ij}^{k-1} + d_{kj}^{k-1}$), the the number of shortest paths using intermediate vertices \{1,2,...k\} is just the number of shortest paths using intermediate vertices \{1,2,...k-1\}. 
+1. If the shortest path between i and j using intermediate vertices \{1,2,...k\} doesn't use vertex k (i.e $d_{ij}^{k-1} < d_{ij}^{k-1} + d_{kj}^{k-1}$), the the number of shortest paths between i and j using intermediate vertices \{1,2,...k\} is just the number of shortest paths using intermediate vertices \{1,2,...k-1\}. 
 
-2. If $d_{ij}^{k-1} = d_{ik}^{k-1} + d_{kj}^{k-1}$, then the number of shortest paths using intermediate vertices \{1,2,...k\} is the number of shortest paths using intermediate vertices \{1,2,...k-1\} plus the number of shortest paths going through intermediate vertex k. The number of shortest paths going through vertex k is $\delta_{ij}^{k}$ = $N_{ik}^{k-1}$ x $N_{kj}^{k-1}$ (number of shortest paths from i to k multiplied by number of shortest paths from k to j) Obviously, k cannot be an intermediate vertex on a path from i to k or k to j (else we'd have a negative cycle contrary to our hypothesis) so we can use the set of intermediate vertices \{1,2,...k-1\} to calculate $\delta_{ij}^{k}$.
+2. If $d_{ij}^{k-1} = d_{ik}^{k-1} + d_{kj}^{k-1}$, then the number of shortest paths from i to j using intermediate vertices \{1,2,...k\} is the number of shortest paths using intermediate vertices \{1,2,...k-1\} plus the number of shortest paths going through intermediate vertex k. The number of shortest paths going through vertex k is $\delta_{ij}^{k}$ = $N_{ik}^{k-1}$ x $N_{kj}^{k-1}$ (number of shortest paths from i to k multiplied by number of shortest paths from k to j) Obviously, k cannot be an intermediate vertex on a path from i to k or k to j (else we'd have a negative cycle contrary to our hypothesis) so we can use the set of intermediate vertices \{1,2,...k-1\} to calculate $\delta_{ij}^{k}$.
 
 3. If $d_{ij}^{k-1} > d_{ik}^{k-1} + d_{kj}^{k-1}$, then the number of shortest paths from i to j is just the number of shortest paths that go through k which is $\delta_{ij}^{k}$.
 
