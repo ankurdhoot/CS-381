@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  31 OCT 2016 17:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.31)  5 NOV 2016 01:36
 entering extended mode
-**./hw5.tex
-(hw5.tex
+**./hw6.tex
+(hw6.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 
@@ -131,8 +131,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
-) (hw5.aux)
-\openout1 = `hw5.aux'.
+) (hw6.aux)
+\openout1 = `hw6.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -146,51 +146,35 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--33
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 72.
-
-("C:\Users\Ankur Dhoot\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.
-fd"
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 72.
  [1
 
 {C:/Users/Ankur Dhoot/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [
-3] (hw5.aux) ) 
+3] (hw6.aux) ) 
 Here is how much of TeX's memory you used:
- 1503 strings out of 493334
- 19541 string characters out of 3127622
- 78245 words of memory out of 3000000
- 5066 multiletter control sequences out of 15000+200000
+ 1486 strings out of 493334
+ 19186 string characters out of 3127622
+ 79245 words of memory out of 3000000
+ 5052 multiletter control sequences out of 15000+200000
  10002 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,7n,20p,745b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,6n,20p,663b,302s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Ankur Dhoot/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Use
 rs/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmex10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Ankur Dhoot/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/An
-kur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmr17.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Pr
-ograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Ankur Dhoot
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
-:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb>
-Output written on hw5.pdf (3 pages, 141255 bytes).
+/cmmi10.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Ankur Dhoot/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Ank
+ur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17
+.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><C:/Users/Ankur Dhoot/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Ankur Dhoot/AppData/Local/Prog
+rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on hw6.pdf (3 pages, 125354 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
+ 56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
