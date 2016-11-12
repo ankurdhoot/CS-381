@@ -54,7 +54,7 @@ BFS runs in O(V + E) and we've only added constant time modifications to the inn
 
 \section*{Q2}
 
-Given the network graph G, construct the flow network G' by giving each edge unit capacity. (Consider the network graph G as a directed graph with directed edges (u,v) and (v,u) if (u,v) $\in$ G.E) What is the minimum number of edges we must remove in order to disconnect two vertices, s and t? 
+Given the network graph G, construct the flow network G' by giving each edge unit capacity and creating bidirectional directed edges for each undirected edge in G. (i.e if (u,v) is an edge in G.E, (u,v) and (v,u) are directed edges in G') What is the minimum number of edges we must remove in order to disconnect two vertices, s and t? 
 
 Consider any cut (S,T) of the graph G', where S and T are some partition of G', s $\in$ S and t $\in$ T. If we remove all the edges going from S to T in G' (call this graph G''), then we have disconnected s and t. Why? Suppose not. Then there exists some path from s to t in G''. At some point, the path must have an edge from a vertex in S to a vertex in T (since t $\in$ T). But all such edges have been deleted, a contradiction.
 
@@ -62,9 +62,9 @@ How many edges are we removing? Since all edges have unit capacity, the number o
 
 It's clear then that if we want to find the minimum number of edges we must remove to disconnect s and t, we must compute an st min-cut of G', and the minimum number of edges then equals the capacity of this st min-cut.
 
-And how should we find the capacity an st min-cut in G'? Well, we know that the maximum flow is equivalent to the capacity of an st min-cut, so we must compute the maximum flow. And how should we compute the maximum flow? Well, we can use a particular implementation of Ford-Fulkerson such as the Edmonds-Karp algorithm!
+And how should we find the capacity an st min-cut in G'? Well, we know that the maximum flow is equivalent to the capacity of an st min-cut, so we must compute the maximum flow. And how should we compute the maximum flow? Well, we can use a particular implementation of Ford-Fulkerson such as the Edmonds-Karp algorithm! The only thing we need to be careful about is how we calculate the residual capacities. If the flow along some edge (u,v) in the original undirected network G is directed from u to v with value f, then the residual capacity in G' is $c_{f}$(v,u) = c(v,u) + f and $c_{f}$(u,v) = c(u,v) - f (i.e if we send one unit of flow from u to v, then the residual capacity of (v,u) increases by one unit and the residual capacity of (u, v) decreases by one unit).
 
-Moreover, if we want the actual edges needed to be removed, we can compute this information as well. Let S be the set of vertices reachable from s in the final residual network of G'. Let T = V - S. Then, as is shown in the book, we have c(S,T) = f(S,T) implying (S, T) is our desired st min-cut, and the edges from S to T are those which must be deleted.
+Moreover, if we want the actual edges needed to be removed, we can compute this information as well. Let S be the set of vertices reachable from s in the final residual network of G' (contains no augmenting paths). Let T = V - S. Then, as is shown in the book, we have c(S,T) = f(S,T) implying (S, T) is our desired st min-cut, and the edges from S to T are those which must be deleted.
 
 The algorithm follows immediately:
 \begin{algorithm}
@@ -72,7 +72,7 @@ The algorithm follows immediately:
 \begin{algorithmic}[1]
 \Function{findConnectivity}{G, s, t}
 	\State Initialize G'
-	\State Run Edmonds-Karp on G' with source s and destination t
+	\State Run Edmonds-Karp on G' with source s (Jen) and destination t (Ali)
 	\State \Return max-flow computed
 
 \EndFunction
